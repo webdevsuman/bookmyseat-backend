@@ -69,12 +69,12 @@ app.post("/login", async (req, res) => {
     );
     const database = databaseQuery.rows[0];
     // console.log(database);
-    
+
     if (database.password === password) {
       if (username === "admin") {
-        res.redirect("http://localhost:5173/admin");
+        res.redirect("https://bookmyseat.vercel.app/admin");
       } else {
-        res.redirect(`http://localhost:5173/users/${database.id}`);
+        res.redirect(`https://bookmyseat.vercel.app/users/${database.id}`);
       }
     } else {
       res.send("<p>Wrong Username or Password entered!</p>");
@@ -94,7 +94,7 @@ app.post("/adduser", async (req, res) => {
       "INSERT INTO users(username,password) VALUES($1,$2)",
       [username, password]
     );
-    res.redirect("http://localhost:5173/admin");
+    res.redirect("https://bookmyseat.vercel.app/admin");
   } catch (err) {
     console.log(err);
   }
@@ -110,7 +110,7 @@ app.post("/addroom", async (req, res) => {
       "INSERT INTO room_name(room_name,total_seats) VALUES($1,$2)",
       [room_name, total_seats]
     );
-    res.redirect("http://localhost:5173/admin");
+    res.redirect("https://bookmyseat.vercel.app/admin");
   } catch (err) {
     console.log(err);
   }
@@ -141,7 +141,7 @@ app.delete("/delete/:id", async (req, res) => {
       return res.status(404).send({ message: "Slot not found" });
     }
     res.status(200).send({ message: "Slot deleted successfully" });
-    res.redirect("http://localhost:5173/admin");
+    res.redirect("https://bookmyseat.vercel.app/admin");
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Error deleting Slot" });
